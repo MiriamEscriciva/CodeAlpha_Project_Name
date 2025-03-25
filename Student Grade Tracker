@@ -1,0 +1,36 @@
+print("Hey! Welcome to the Student Grade Tracker!")
+
+grades = {} 
+
+while True:
+    subject = input("Enter the name of the subject (or type 'exit' to stop): ")
+    
+    if subject.lower() == 'exit':
+        break
+    
+    try:
+        grade = float(input(f"Enter the grade for {subject}: "))  
+        if subject in grades: 
+            grades[subject].append(grade)
+        else: 
+            grades[subject] = [grade]
+    except ValueError:  
+        print("Oops! Please enter a number for the grade.")
+
+print("\n--- Your Grades ---")
+total_grades = 0
+total_subjects = 0
+
+for subject, grade_list in grades.items():
+    average = sum(grade_list) / len(grade_list) 
+    total_grades += sum(grade_list)  
+    total_subjects += len(grade_list) 
+    print(f"{subject}: Grades: {grade_list}, Average: {average:.2f}")
+
+if total_subjects > 0:
+    overall_average = total_grades / total_subjects  
+    print(f"\nYour Overall Average Grade: {overall_average:.2f}")
+else:
+    print("You didn't enter any grades!")
+
+print("Thanks for using the tracker!")
